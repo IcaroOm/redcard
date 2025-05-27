@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-xl p-8 border-4 border-imperial-red">
+        <h1 class="text-3xl font-chinese text-imperial-red mb-6">
+            Import Anki Deck
+        </h1>
+        
+        {% if error %}
+        <div class="alert alert-error mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>{{ error }}</span>
+        </div>
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-control mb-6">
+                <label class="label">
+                    <span class="label-text text-ink-black">Select Anki Deck File</span>
+                </label>
+                <input type="file" name="anki_file" 
+                       class="file-input file-input-bordered w-full"
+                       accept=".apkg">
+            </div>
+            
+            <div class="text-center">
+                <button type="submit" 
+                        class="btn bg-imperial-red text-yellow-100 hover:bg-red-900 border-none font-chinese">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    Upload Scroll
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

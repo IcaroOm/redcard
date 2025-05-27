@@ -1,0 +1,11 @@
+<div class="bg-white rounded-lg shadow-md p-6 text-center space-y-4">
+    <div class="text-4xl">🎉</div>
+    <h2 class="text-xl font-medium text-gray-600">All Caught Up!</h2>
+    <p class="text-gray-500">No cards due for review.</p>
+    <button class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors"
+            hx-get="/due-flashcards/"
+            hx-target="#card-container"
+            hx-swap="outerHTML">
+        Check Again
+    </button>
+</div>

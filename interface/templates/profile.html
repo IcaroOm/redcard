@@ -1,0 +1,49 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <!-- Profile Header -->
+    <div class="bg-white rounded-lg shadow-xl p-6 mb-8 border-4 border-imperial-red">
+        <h1 class="text-3xl font-chinese text-imperial-red mb-4">
+            {{ user.username }}'s Study Hall
+        </h1>
+        <div class="w-full bg-gray-200 rounded-full h-4">
+            <div class="bg-imperial-red h-4 rounded-full" 
+                 style="width: {{ total_progress }}%"></div>
+        </div>
+        <p class="text-right mt-2 text-gray-600">
+            Mastery Progress: {{ total_progress }}%
+        </p>
+    </div>
+
+    <!-- Deck Management -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Existing Decks -->
+        {% for deck in decks %}
+        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+            <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-chinese text-ink-black">{{ deck.name }}</h3>
+                <span class="text-sm text-gray-500">{{ deck.created_at|date:"Y-m-d" }}</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                <div class="bg-imperial-red h-2 rounded-full" 
+                     style="width: {{ deck.get_progress }}%"></div>
+            </div>
+            <div class="flex justify-between text-sm text-gray-600">
+                <span>{{ deck.due_cards }} due</span>
+                <span>{{ deck.total_cards }} cards</span>
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- Upload Card -->
+        <a href="{% url 'upload' %}" 
+           class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border-2 border-dashed border-imperial-red flex items-center justify-center">
+            <div class="text-center">
+                <div class="text-4xl text-imperial-red mb-2">+</div>
+                <p class="font-chinese text-ink-black">Add New Deck</p>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock %}

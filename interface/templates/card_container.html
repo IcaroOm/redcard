@@ -1,0 +1,36 @@
+<div id="card-container" class="container mx-auto px-4 py-8">
+    {% if card %}
+        <div class="bg-white shadow-lg rounded-lg p-6 mb-6 border">
+            <div class="text-center">
+                <div class="text-6xl font-bold">{{ card.character }}</div>
+                <div class="text-xl mt-2">{{ card.pinyin }}</div>
+            </div>
+        </div>
+        
+        <form method="post" 
+              hx-post="{% url 'update_card' card.id %}"
+              hx-target="#card-container"
+              hx-swap="outerHTML"
+              class="flex justify-center space-x-4">
+            {% csrf_token %}
+            <button type="submit" name="is_correct" value="true" 
+                    class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors">
+                Correct ✅
+            </button>
+            <button type="submit" name="is_correct" value="false" 
+                    class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors">
+                Incorrect ❌
+            </button>
+        </form>
+    {% else %}
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <p class="text-center text-gray-700">
+                🎉 All caught up! No more cards due today.
+                <a href="{% url 'deck_list' %}" 
+                   class="text-blue-500 hover:text-blue-700 mt-4 inline-block">
+                    Choose another deck?
+                </a>
+            </p>
+        </div>
+    {% endif %}
+</div>

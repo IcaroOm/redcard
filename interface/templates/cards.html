@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-6">Session for Deck: {{ deck.name }}</h1>
+    
+    {% if card %}
+        <div id="flashcard" class="bg-white shadow-lg rounded-lg p-6 mb-6 border">
+            <div class="text-center">
+                <div class="text-6xl font-bold">{{ card.character }}</div>
+                <div class="text-xl mt-2">{{ card.pinyin }}</div>
+            </div>
+        </div>
+        
+        <form method="post" action="{% url 'update' card.id %}" class="flex justify-center space-x-4">
+            {% csrf_token %}
+            <button type="submit" name="is_correct" value="true" class="bg-green-500 text-white px-4 py-2 rounded">
+                Correct
+            </button>
+            <button type="submit" name="is_correct" value="false" class="bg-red-500 text-white px-4 py-2 rounded">
+                Incorrect
+            </button>
+        </form>
+    {% else %}
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <p class="text-center text-gray-700">No due flashcards available for this deck.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

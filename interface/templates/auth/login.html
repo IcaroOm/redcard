@@ -1,0 +1,60 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="flex justify-center items-center flex-grow">
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-sm">
+        <h1 class="text-3xl font-bold mb-6 text-center">Login</h1>
+        <form method="POST" action="{% url 'login' %}" class="space-y-4">
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div class="alert alert-error">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Username</span>
+                </label>
+                <input type="text" 
+                       name="username" 
+                       class="input input-bordered w-full {% if form.username.errors %}input-error{% endif %}"
+                       placeholder="Enter your username"
+                       value="{{ form.username.value|default:'' }}">
+                {% for error in form.username.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">{{ error }}</span>
+                    </label>
+                {% endfor %}
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Password</span>
+                </label>
+                <input type="password" 
+                       name="password" 
+                       class="input input-bordered w-full {% if form.password.errors %}input-error{% endif %}"
+                       placeholder="Enter your password">
+                {% for error in form.password.errors %}
+                    <label class="label">
+                        <span class="label-text-alt text-error">{{ error }}</span>
+                    </label>
+                {% endfor %}
+            </div>
+
+            <button class="btn btn-primary w-full mt-4" type="submit">Login</button>
+        </form>
+        <p class="text-center mt-4">
+            Don't have an account?
+            <a href="{% url 'register' %}" class="text-blue-500 hover:underline">Create an Account</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

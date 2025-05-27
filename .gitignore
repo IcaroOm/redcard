@@ -1,0 +1,6 @@
+db.sqlite3
+requirementes.txt
+venv
+__pycache__
+staticfiles
+scripts
