@@ -13,6 +13,20 @@ class Deck(models.Model):
         User, on_delete=models.CASCADE, related_name='decks'
     )
 
+    @property
+    def card_count(self):
+        """Returns the total number of cards in this deck."""
+        return self.cards.count()
+
+    def get_due_cards(self):
+        """Returns a queryset of cards that are due for review."""
+        return self.cards.filter(next_review__lte=timezone.now())
+
+    @property
+    def due_cards_count(self):
+        """Returns the count of cards due for review."""
+        return self.get_due_cards().count()
+
     def get_progress(self):
         total_cards = self.cards.count()
         if total_cards == 0:
