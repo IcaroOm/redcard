@@ -7,9 +7,9 @@ This app helps you practice Chinese characters using a flashcard interface with 
 ## Features
 
 -  Flashcard sessions with progress tracking
--  One deck per user (for now)
 -  HTMX-powered updates — no page reloads!
 -  Progress bar that updates as you go
+-  Upload your own Anki decks — it might have some weird artifacts in the Pinyin though
 -  Login required
 
 ## Coming Soon (maybe)
