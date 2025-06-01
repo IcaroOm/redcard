@@ -16,9 +16,9 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('register/', register_view, name='register'),
     path('logout/', logout_view, name='logout'),
-    path('decks/<int:deck_id>/session/', deck_session_view, name='deck_session'),
+    path('decks/<int:deck_id>/session/', deck_session_view, name='start_session'),
     path('cards/<int:pk>/update/', update_card_view, name='update_card'),
     path('profile/', ProfileView.as_view(), name='profile'),
     path('upload/', UploadDeckView.as_view(), name='upload'),
-    path('due_decks', DueDecksHTMLView.as_view(), name='due-decks')
+    path('due-decks/', DueDecksHTMLView.as_view(), name='due-decks')
 ]

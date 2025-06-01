@@ -1,0 +1,33 @@
+<div class="container mx-auto px-4 py-8">
+    <!-- Profile Header -->
+    <div class="bg-white rounded-lg shadow-xl p-6 mb-8 border-4 border-imperial-red">
+        <h1 class="text-3xl font-chinese text-imperial-red mb-4">
+            {{ user.username }}'s Due Decks
+        </h1>
+    </div>
+
+    <!-- Deck Management -->
+    {% if due_decks_data %}
+    <div class="{% if due_decks_data|length == 1 %}grid grid-cols-1{% else %}grid grid-cols-1 md:grid-cols-2{% endif %} gap-6">
+        {% for due_deck in due_decks_data %}
+        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow flex flex-col justify-between">
+            <div>
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-chinese text-ink-black">{{ due_deck.deck.name }}</h3>
+                    <span class="text-sm text-gray-500">{{ due_deck.deck.created_at|date:"Y-m-d" }}</span>
+                </div>
+                <div class="flex justify-between text-sm text-gray-600 mb-4">
+                    <span>{{ due_deck.due_cards_count }} due cards</span>
+                    <span>{{ due_deck.total_cards }} total cards</span>
+                </div>
+            </div>
+            <a href="{% url 'start_session' due_deck.deck.id %}" class="mt-auto bg-imperial-red text-white py-2 px-4 rounded hover:bg-red-700 text-center block">
+                Start Session
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-gray-500 italic">You have no due decks.</p>
+    {% endif %}
+</div>

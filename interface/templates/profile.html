@@ -1,4 +1,4 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 <div class="container mx-auto px-4 py-8">
@@ -33,6 +33,9 @@
                 <span>{{ deck.due_cards }} due</span>
                 <span>{{ deck.total_cards }} cards</span>
             </div>
+            <a href="{% url 'start_session' deck.id %}" class="mt-auto bg-imperial-red text-white py-2 px-4 rounded hover:bg-red-700 text-center block">
+                Start Session
+            </a>
         </div>
         {% endfor %}
 
